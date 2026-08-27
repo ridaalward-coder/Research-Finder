@@ -1,0 +1,39 @@
+name: Rida Research Hunter
+on:
+  schedule:
+    - cron: '*/30 * * * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  hunt:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - run: pip install -r requirements.txt
+      - name: Load private candidate profile
+        env:
+          CANDIDATE_PROFILE_JSON: ${{ secrets.CANDIDATE_PROFILE_JSON }}
+        run: python -c "import os,pathlib; pathlib.Path('profile.json').write_text(os.environ['CANDIDATE_PROFILE_JSON'])"
+      - name: Run search and analysis
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_MODEL: gpt-5.6-luna
+          ADZUNA_APP_ID: ${{ secrets.ADZUNA_APP_ID }}
+          ADZUNA_APP_KEY: ${{ secrets.ADZUNA_APP_KEY }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          RESEND_FROM: ${{ secrets.RESEND_FROM }}
+          ALERT_EMAIL: ${{ secrets.ALERT_EMAIL }}
+          BRAVE_SEARCH_API_KEY: ${{ secrets.BRAVE_SEARCH_API_KEY }}
+        run: python -m app.pipeline
+      - run: python generate_static.py
+      - name: Publish updated dashboard data
+        run: |
+          rm -f profile.json
+          git config user.name 'Rida Research Hunter Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add docs data/hunter.db
+          git diff --cached --quiet || git commit -m 'Update research opportunities'
+          git push

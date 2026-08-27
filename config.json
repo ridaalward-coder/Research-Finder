@@ -1,0 +1,40 @@
+{
+  "search": {
+    "job_queries": [
+      "medical robotics undergraduate research internship",
+      "surgical robotics undergraduate research summer",
+      "soft robotics undergraduate summer research",
+      "miniature robotics undergraduate research",
+      "microrobotics undergraduate summer research",
+      "medical device undergraduate research summer",
+      "MEMS microfabrication undergraduate summer research",
+      "microelectronics undergraduate research summer",
+      "nanotechnology undergraduate summer research",
+      "biomedical imaging undergraduate research summer",
+      "signal processing undergraduate research summer",
+      "computer vision undergraduate research summer",
+      "Fourier image analysis undergraduate research summer",
+      "mechatronics undergraduate research summer"
+    ],
+    "university_queries": [
+      "summer undergraduate research robotics university 2027",
+      "summer undergraduate research medical robotics 2027",
+      "summer undergraduate research soft robotics 2027",
+      "summer undergraduate research microrobotics 2027",
+      "summer undergraduate research MEMS nanotechnology 2027",
+      "summer undergraduate research biomedical imaging 2027"
+    ],
+    "max_search_results_per_query": 8,
+    "max_ai_analyses_per_run": 15,
+    "email_threshold": 85,
+    "cold_email_threshold": 82,
+    "lookback_days": 120
+  },
+  "scoring": {
+    "technical_fit": 0.30,
+    "eligibility": 0.25,
+    "realistic_getability": 0.20,
+    "career_value": 0.15,
+    "interest_alignment": 0.10
+  }
+}
