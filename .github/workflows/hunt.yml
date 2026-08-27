@@ -34,6 +34,8 @@ jobs:
           rm -f profile.json
           git config user.name 'Rida Research Hunter Bot'
           git config user.email 'actions@users.noreply.github.com'
+          echo "THIS IS THE NEW WORKFLOW"
+          grep -R "git add" .github/workflows
           git add docs
           git add -f docs data/hunter.db
           git diff --cached --quiet || git commit -m 'Update research opportunities'
